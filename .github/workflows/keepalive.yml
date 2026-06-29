@@ -1,0 +1,22 @@
+name: Supabase 六小时定时保活
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+jobs:
+  keep_alive_task:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 拉取仓库文件
+        uses: actions/checkout@v4
+      - name: 配置Node20环境
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: 安装请求依赖
+        run: npm install node-fetch
+      - name: 运行保活脚本
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: node keepalive.js
