@@ -1,5 +1,4 @@
-const fetch = require('node-fetch');
-
+// 使用 Node 内置原生 fetch，不再依赖 node-fetch 包
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.SUPABASE_KEY;
 
